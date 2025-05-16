@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "8501:8501"
+    environment:
+      DATABASE_URL: "mysql+pymysql://root:mypassword@db:3306/mydatabase"
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
